@@ -5,7 +5,6 @@ on:
     branches:
       - main
 
-
 jobs:
   bundle-and-deploy:
     runs-on: ubuntu-latest
@@ -22,3 +21,12 @@ jobs:
           mkdir dist
           helm package --dependency-update ./bitnami_charts/bitnami/external-dns --destination dist
           ls -al dist
+      - name: Push to registry
+        id: push
+        run: |
+          for file in "./dist"/*; do
+            if [ -f "$file" ]; then
+              echo "uploading: $file"
+              curl -u $USER:$PASS $REGISTRY --upload-file $file
+            fi
+          done          
