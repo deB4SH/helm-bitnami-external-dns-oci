@@ -9,6 +9,8 @@ on:
 jobs:
   bundle-and-deploy:
     runs-on: ubuntu-latest
+    container:
+      image: hotbird.docker.nexus.macslabs.de/docker/ci-helm-image:fc6e855
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
