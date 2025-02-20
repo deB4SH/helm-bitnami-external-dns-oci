@@ -1,0 +1,22 @@
+name: bundle-chart
+
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  bundle-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: 'true'
+      - name: package
+        id: package
+        run: |
+          mkdir dist
+          helm package --dependency-update ./bitnami_charts/bitnami/external_dns --destination dist
+          ls -al dist
