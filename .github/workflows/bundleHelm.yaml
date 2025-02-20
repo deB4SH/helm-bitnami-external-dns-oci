@@ -31,7 +31,7 @@ jobs:
       - name: Get Version from Chart
         id: get_version
         run: |
-          echo HELM_FINAL_VERSION=$(grep -m 1 -Eo '[0-9]{1,}.[0-9]{1,}.[0-9]{1,}-[a-z0-9]{1,}' ./bitnami_charts/bitnami/external-dns/Chart.yaml) >> $GITHUB_OUTPUT
+          echo HELM_FINAL_VERSION=$(grep -w ^version: ./bitnami_charts/bitnami/external-dns/Chart.yaml | cut -d " " -f2) >> $GITHUB_OUTPUT
       - name: Package
         id: package
         run: |
