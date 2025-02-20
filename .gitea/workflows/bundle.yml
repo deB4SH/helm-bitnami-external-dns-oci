@@ -19,8 +19,6 @@ jobs:
       - name: package
         id: package
         run: |
-          ls -al
-          ls -al ./bitnami_charts
           mkdir dist
-          helm package --dependency-update ./bitnami_charts/bitnami/external_dns --destination dist
+          helm package --dependency-update ./bitnami_charts/bitnami/external-dns --destination dist
           ls -al dist
